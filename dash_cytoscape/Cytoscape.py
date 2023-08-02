@@ -6,7 +6,7 @@ from dash.development.base_component import Component, _explicitize_args
 class Cytoscape(Component):
     """A Cytoscape component.
 A Component Library for Dash aimed at facilitating network visualization in
-Python, wrapped around [Cytoscape.js](http://js.cytoscape.org/).
+ Python, wrapped around [Cytoscape.js](http://js.cytoscape.org/).
 
 Keyword arguments:
 
@@ -37,6 +37,9 @@ Keyword arguments:
 - className (string; optional):
     Sets the class name of the element (the value of an element's html
     class attribute).
+
+- clearOnUnhover (boolean; default False):
+    Clear mouseoverNodeData and mouseoverEdgeData on unhover.
 
 - elements (list of dicts; optional):
     A list of dictionaries representing the elements of the networks.
@@ -113,6 +116,9 @@ Keyword arguments:
     - edges (list; optional)
 
     - nodes (list; optional)
+
+- extent (dict; optional):
+    Extent.
 
 - generateImage (dict; optional):
     Dictionary specifying options to generate an image of the current
@@ -428,20 +434,19 @@ Keyword arguments:
 - zoomingEnabled (boolean; default True):
     Whether zooming the graph is enabled (i.e., the zoom level of the
     graph is mutable overall)."""
+    _children_props = []
+    _base_nodes = ['children']
+    _namespace = 'dash_cytoscape'
+    _type = 'Cytoscape'
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, className=Component.UNDEFINED, style=Component.UNDEFINED, elements=Component.UNDEFINED, stylesheet=Component.UNDEFINED, layout=Component.UNDEFINED, pan=Component.UNDEFINED, zoom=Component.UNDEFINED, panningEnabled=Component.UNDEFINED, userPanningEnabled=Component.UNDEFINED, minZoom=Component.UNDEFINED, maxZoom=Component.UNDEFINED, zoomingEnabled=Component.UNDEFINED, userZoomingEnabled=Component.UNDEFINED, boxSelectionEnabled=Component.UNDEFINED, autoungrabify=Component.UNDEFINED, autolock=Component.UNDEFINED, autounselectify=Component.UNDEFINED, autoRefreshLayout=Component.UNDEFINED, tapNode=Component.UNDEFINED, tapNodeData=Component.UNDEFINED, tapEdge=Component.UNDEFINED, tapEdgeData=Component.UNDEFINED, mouseoverNodeData=Component.UNDEFINED, mouseoverEdgeData=Component.UNDEFINED, selectedNodeData=Component.UNDEFINED, selectedEdgeData=Component.UNDEFINED, generateImage=Component.UNDEFINED, imageData=Component.UNDEFINED, responsive=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'autoRefreshLayout', 'autolock', 'autoungrabify', 'autounselectify', 'boxSelectionEnabled', 'className', 'elements', 'generateImage', 'imageData', 'layout', 'maxZoom', 'minZoom', 'mouseoverEdgeData', 'mouseoverNodeData', 'pan', 'panningEnabled', 'responsive', 'selectedEdgeData', 'selectedNodeData', 'style', 'stylesheet', 'tapEdge', 'tapEdgeData', 'tapNode', 'tapNodeData', 'userPanningEnabled', 'userZoomingEnabled', 'zoom', 'zoomingEnabled']
-        self._type = 'Cytoscape'
-        self._namespace = 'dash_cytoscape'
+    def __init__(self, id=Component.UNDEFINED, className=Component.UNDEFINED, style=Component.UNDEFINED, elements=Component.UNDEFINED, stylesheet=Component.UNDEFINED, layout=Component.UNDEFINED, pan=Component.UNDEFINED, zoom=Component.UNDEFINED, panningEnabled=Component.UNDEFINED, userPanningEnabled=Component.UNDEFINED, minZoom=Component.UNDEFINED, maxZoom=Component.UNDEFINED, zoomingEnabled=Component.UNDEFINED, userZoomingEnabled=Component.UNDEFINED, boxSelectionEnabled=Component.UNDEFINED, autoungrabify=Component.UNDEFINED, autolock=Component.UNDEFINED, autounselectify=Component.UNDEFINED, autoRefreshLayout=Component.UNDEFINED, tapNode=Component.UNDEFINED, tapNodeData=Component.UNDEFINED, tapEdge=Component.UNDEFINED, tapEdgeData=Component.UNDEFINED, mouseoverNodeData=Component.UNDEFINED, mouseoverEdgeData=Component.UNDEFINED, selectedNodeData=Component.UNDEFINED, selectedEdgeData=Component.UNDEFINED, generateImage=Component.UNDEFINED, imageData=Component.UNDEFINED, responsive=Component.UNDEFINED, clearOnUnhover=Component.UNDEFINED, extent=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'autoRefreshLayout', 'autolock', 'autoungrabify', 'autounselectify', 'boxSelectionEnabled', 'className', 'clearOnUnhover', 'elements', 'extent', 'generateImage', 'imageData', 'layout', 'maxZoom', 'minZoom', 'mouseoverEdgeData', 'mouseoverNodeData', 'pan', 'panningEnabled', 'responsive', 'selectedEdgeData', 'selectedNodeData', 'style', 'stylesheet', 'tapEdge', 'tapEdgeData', 'tapNode', 'tapNodeData', 'userPanningEnabled', 'userZoomingEnabled', 'zoom', 'zoomingEnabled']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'autoRefreshLayout', 'autolock', 'autoungrabify', 'autounselectify', 'boxSelectionEnabled', 'className', 'elements', 'generateImage', 'imageData', 'layout', 'maxZoom', 'minZoom', 'mouseoverEdgeData', 'mouseoverNodeData', 'pan', 'panningEnabled', 'responsive', 'selectedEdgeData', 'selectedNodeData', 'style', 'stylesheet', 'tapEdge', 'tapEdgeData', 'tapNode', 'tapNodeData', 'userPanningEnabled', 'userZoomingEnabled', 'zoom', 'zoomingEnabled']
+        self.available_properties = ['id', 'autoRefreshLayout', 'autolock', 'autoungrabify', 'autounselectify', 'boxSelectionEnabled', 'className', 'clearOnUnhover', 'elements', 'extent', 'generateImage', 'imageData', 'layout', 'maxZoom', 'minZoom', 'mouseoverEdgeData', 'mouseoverNodeData', 'pan', 'panningEnabled', 'responsive', 'selectedEdgeData', 'selectedNodeData', 'style', 'stylesheet', 'tapEdge', 'tapEdgeData', 'tapNode', 'tapNodeData', 'userPanningEnabled', 'userZoomingEnabled', 'zoom', 'zoomingEnabled']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()
-        _locals.update(kwargs)  # For wildcard attrs
-        args = {k: _locals[k] for k in _explicit_args if k != 'children'}
-        for k in []:
-            if k not in args:
-                raise TypeError(
-                    'Required argument `' + k + '` was not specified.')
+        _locals.update(kwargs)  # For wildcard attrs and excess named props
+        args = {k: _locals[k] for k in _explicit_args}
+
         super(Cytoscape, self).__init__(**args)

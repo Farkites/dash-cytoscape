@@ -171,6 +171,12 @@ class Cytoscape extends Component {
             }
         }, SELECT_THRESHOLD);
 
+        const setExtent = _.debounce((cyExtent) => {
+            this.props.setProps({
+                extent: cyExtent,
+            });
+        }, 0);
+
         const sendSelectedNodesData = _.debounce(() => {
             /**
               This function is repetitively called every time a node is selected
@@ -313,8 +319,12 @@ class Cytoscape extends Component {
             }
         });
 
+        cy.on('viewport resize', () => {
+            setExtent(cy.extent());
+        });
         this.cyResponsiveClass = new CyResponsive(cy);
         this.cyResponsiveClass.toggle(this.props.responsive);
+        setExtent(cy.extent());
     }
 
     handleImageGeneration(imageType, imageOptions, actionsToPerform, fileName) {
@@ -946,6 +956,13 @@ Cytoscape.propTypes = {
      * Clear mouseoverNodeData and mouseoverEdgeData on unhover
      */
     clearOnUnhover: PropTypes.bool,
+
+    /**
+     * Extent of the viewport, a bounding box in model co-ordinates that lets you know what model
+     * positions are visible in the viewport. This function returns a plain object bounding box
+     * with format { x1, y1, x2, y2, w, h }.
+     */
+    extent: PropTypes.object,
 };
 
 Cytoscape.defaultProps = {

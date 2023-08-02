@@ -6,13 +6,14 @@
 \title{Cytoscape component}
 
 \description{
-A Component Library for Dash aimed at facilitating network visualization in Python, wrapped around [Cytoscape.js](http://js.cytoscape.org/).
+A Component Library for Dash aimed at facilitating network visualization in  Python, wrapped around [Cytoscape.js](http://js.cytoscape.org/).
 }
 
 \usage{
 cytoCytoscape(id=NULL, autoRefreshLayout=NULL, autolock=NULL,
 autoungrabify=NULL, autounselectify=NULL,
-boxSelectionEnabled=NULL, className=NULL, elements=NULL,
+boxSelectionEnabled=NULL, className=NULL,
+clearOnUnhover=NULL, elements=NULL, extent=NULL,
 generateImage=NULL, imageData=NULL, layout=NULL,
 maxZoom=NULL, minZoom=NULL, mouseoverEdgeData=NULL,
 mouseoverNodeData=NULL, pan=NULL, panningEnabled=NULL,
@@ -43,6 +44,8 @@ to select) is enabled. If enabled, the user must taphold to pan the graph.}
 \item{className}{Character. Sets the class name of the element (the value of an element's html
 class attribute).}
 
+\item{clearOnUnhover}{Logical. Clear mouseoverNodeData and mouseoverEdgeData on unhover}
+
 \item{elements}{List of lists containing elements 'group', 'data', 'position', 'selected', 'selectable', 'locked', 'grabbable', 'classes'.
 those elements have the following types:
   - group (character; optional): either 'nodes' or 'edges'. if not given, it's automatically inferred.
@@ -71,6 +74,8 @@ specifies its purpose. The [official Cytoscape.js documentation](https://js.cyto
 offers an extensive overview and examples of element declaration.
 Alternatively, a dictionary with the format { 'nodes': [], 'edges': [] } is allowed at initialization,
 but arrays remain the recommended format.}
+
+\item{extent}{Named list. Extent}
 
 \item{generateImage}{Lists containing elements 'type', 'options', 'action', 'filename'.
 those elements have the following types:

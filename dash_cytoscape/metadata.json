@@ -1,6 +1,6 @@
 {
   "src/lib/components/Cytoscape.react.js": {
-    "description": "A Component Library for Dash aimed at facilitating network visualization in\nPython, wrapped around [Cytoscape.js](http://js.cytoscape.org/).",
+    "description": "A Component Library for Dash aimed at facilitating network visualization in\n Python, wrapped around [Cytoscape.js](http://js.cytoscape.org/).",
     "displayName": "Cytoscape",
     "methods": [
       {
@@ -880,6 +880,24 @@
           "value": "false",
           "computed": false
         }
+      },
+      "clearOnUnhover": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Clear mouseoverNodeData and mouseoverEdgeData on unhover",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "extent": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Extent"
       }
     }
   }
